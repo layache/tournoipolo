@@ -24,29 +24,33 @@ and open the template in the editor.
         <p> Vous avez un crédit de 20 points </p>
 
         <?php
-        while ($ligne = mysqli_fetch_array($res)) {
+            if(isset($_POST['idjoueur'])) {
+                $listPlayer = explode('[/.-]', $_POST['idjoueur']);
+                foreach($player as $listPlayer) {
+                    echo 'Vous avez choisi '.$player;
+                }
+            }
+        ?>
 
-            $nomjoueur = $ligne["nomjoueur"];
-            $prenomjoueur = $ligne["prenomjoueur"];
-            $niveaujoueur = $ligne["niveaujoueur"];
-            ?> 
 
-
-            <div class="joueurs"> 
-                <p> Nom: <?php echo $nomjoueur; ?>  </p> 
-                <p> Prénom:  <?php echo $prenomjoueur; ?> </p> 
-                <p> Niveau: <?php echo $niveaujoueur; ?>  </p> 
-                <input type="submit" value="Choisir">  
-            </div> 
-
-            <?php
-        }
-        ?> 
+        <?php
+            while ($ligne = mysqli_fetch_array($res)) {
+        ?>
+            <form action="" method="POST">
+                <input type="hidden" name="idjoueur" value="<?php echo (isset($_POST['idjoueur']) ?$_POST['idjoueur'].';' : '').$ligne["idjoueur"]; ?>" />
+                <div class="joueurs">
+                    <p> Nom: <?php echo $ligne["nomjoueur"]; ?>  </p>
+                    <p> Prénom:  <?php echo $ligne["prenomjoueur"]; ?> </p>
+                    <p> Niveau: <?php echo $ligne["niveaujoueur"]; ?>  </p>
+                    <input type="submit" value="Choisir">
+                </div>
+            </form>
+        <?php
+            }
+        ?>
 
 
 
 
     </body>
 </html>
-
-
