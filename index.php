@@ -25,7 +25,7 @@ and open the template in the editor.
 
         <?php
             if(isset($_POST['idjoueur'])) {
-                $listPlayer = explode('[/.-]', $_POST['idjoueur']);
+                $listPlayer = explode(';', $_POST['idjoueur']);
                 foreach($player as $listPlayer) {
                     echo 'Vous avez choisi '.$player;
                 }
